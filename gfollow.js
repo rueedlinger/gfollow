@@ -15,31 +15,35 @@ function createHeader(key, value) {
 }
 
 // get all folowers
-request("GET /user/followers", createHeader())
-  .then((resp) => {
-    let followers = resp.data.map((x) => x.login);
-    console.log(`\nTry to follow back all my ${followers.length} followers`);
+request("GET /user/followers", createHeader()).then((resp) => {
+  let followers = resp.data.map((x) => x.login);
+  console.log(`\nTry to follow back all my ${followers.length} followers`);
 
-    for (let i = 0; i < followers.length; i++) {
-      let userFollowBack = followers[i];
+  const promises = [];
+
+  for (let i = 0; i < followers.length; i++) {
+    let userFollowBack = followers[i];
+    promises.push(
       request(
         "PUT /user/following/{username}",
         createHeader("username", userFollowBack)
       ).then((resp) => {
         console.log(`${userFollowBack} => ${resp.status}`);
-      });
-    }
-    return new Set(followers);
-  })
-  .then((followers) => {
-    request("GET /user/following", createHeader()).then((resp) => {
-      let following = new Set(resp.data.map((x) => x.login));
+      })
+    );
+  }
 
+  Promise.all(promises).then(() => {
+    
+    request("GET /user/following", createHeader()).then((resp) => {
+      let followingSet = new Set(resp.data.map((x) => x.login));
+      let followerSet = new Set(followers)
+        
       let notFollowingBack = new Set(
-        [...following].filter((x) => !followers.has(x))
+        [...followingSet].filter((x) => !followerSet.has(x))
       );
       let missedToFollow = new Set(
-        [...followers].filter((x) => !following.has(x))
+        [...followerSet].filter((x) => !followingSet.has(x))
       );
       console.log("\nNot following back :-(");
       console.log(notFollowingBack);
@@ -48,3 +52,4 @@ request("GET /user/followers", createHeader())
       console.log(missedToFollow);
     });
   });
+});
