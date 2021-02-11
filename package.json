@@ -1,0 +1,26 @@
+{
+  "name": "gfollow",
+  "version": "1.0.0",
+  "description": "GitHub #FollowBack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rueedlinger/gfollow.git"
+  },
+  "keywords": [
+    "GitHub"
+  ],
+  "author": "M. Rueedlinger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rueedlinger/gfollow/issues"
+  },
+  "homepage": "https://github.com/rueedlinger/gfollow#readme",
+  "dependencies": {
+    "@octokit/core": "^3.2.5",
+    "dotenv": "^8.2.0"
+  }
+}
