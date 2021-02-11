@@ -28,7 +28,7 @@ request("GET /user/followers", createHeader()).then((resp) => {
         "PUT /user/following/{username}",
         createHeader("username", userFollowBack)
       ).then((resp) => {
-        console.log(`${userFollowBack} => ${resp.status}`);
+        console.log(`${userFollowBack} => HTTP ${resp.status}`);
       })
     );
   }
@@ -45,10 +45,10 @@ request("GET /user/followers", createHeader()).then((resp) => {
       let missedToFollow = new Set(
         [...followerSet].filter((x) => !followingSet.has(x))
       );
-      console.log("\nNot following back :-(");
+      console.log(`\nThere ${notFollowingBack.size} people who do not follow you back!`);
       console.log(notFollowingBack);
 
-      console.log("\nOpps missed to follow back....");
+      console.log(`\nYou forgot to follow ${missedToFollow.size} people back!`);
       console.log(missedToFollow);
     });
   });

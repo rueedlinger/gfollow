@@ -12,7 +12,7 @@
 ACCESS_TOKEM=***** SECRET TOKEN *****
 ```
 
-3. Install all required package.
+3. Install all required packages.
 
 ```bash
 npm install
@@ -23,6 +23,7 @@ npm install
 ```bash
 node ghFollow.js
 ```
+
 
 
 
