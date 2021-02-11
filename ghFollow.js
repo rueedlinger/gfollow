@@ -25,6 +25,7 @@ request("GET /user/followers", createHeader()).then((resp) => {
   for (let i = 0; i < followers.length; i++) {
     let userFollowBack = followers[i];
     promises.push(
+      // Follow a user
       request(
         "PUT /user/following/{username}",
         createHeader("username", userFollowBack)
