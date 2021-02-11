@@ -6,24 +6,29 @@
 
 1. Create a personal access token at https://github.com/settings/tokens/new?scopes=repo with only the access rights `user:follow`
 
-2. Create a `.env` env file. Just rename [example.env](example.env) and replace the `GH_ACCESS_TOKEN` with your personal access token. 
+2. Clone the repo
+
+```bash
+git clone https://github.com/rueedlinger/ghfollow.git
+```
+
+3. Create a `.env` env file. Just rename [example.env](example.env) and replace the `GH_ACCESS_TOKEN` with your personal access token. 
 
 ```bash
 ACCESS_TOKEM=***** SECRET TOKEN *****
 ```
 
-3. Install all required packages.
+4. Install all required packages.
 
 ```bash
 npm install
 ```
 
-4. Run the script
+5. Run the script.
 
 ```bash
 node ghFollow.js
 ```
-
 
 
 
