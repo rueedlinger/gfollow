@@ -2,7 +2,7 @@ const { request } = require("@octokit/request");
 require("dotenv").config();
 
 function createHeader(key, value) {
-  let ghToken = process.env.GH_ACCESS_TOKEM;
+  let ghToken = process.env.GH_ACCESS_TOKEN;
   let authHeader = {
     headers: {
       authorization: `token ${ghToken}`,

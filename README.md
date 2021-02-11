@@ -6,7 +6,7 @@
 
 1. Create a personal access token at https://github.com/settings/tokens/new?scopes=repo with only the access rights `user:follow`
 
-2. Create a `.env` env file. Just rename [example.env](example.env) and replace the `ACCESS_TOKEM` with your personal access token. 
+2. Create a `.env` env file. Just rename [example.env](example.env) and replace the `GH_ACCESS_TOKEN` with your personal access token. 
 
 ```bash
 ACCESS_TOKEM=***** SECRET TOKEN *****
