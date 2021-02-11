@@ -1,8 +1,8 @@
-# ghFollow.js - Follow people back on GitHub
+# ghFollow.js - Follow People Back on GitHub
 
 > I started following back on GitHub. First I thought this feature is useless. But since then I found a lot of interesting projects which I definitely would not have found. This script is for those which want to follow people back with just one click.
 
-## How to run the script
+## How to Run the Script
 
 1. Create a personal access token at https://github.com/settings/tokens/new?scopes=repo with only the access rights `user:follow`
 
