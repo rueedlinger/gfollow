@@ -14,13 +14,14 @@ function createHeader(key, value) {
   return authHeader;
 }
 
-// get all folowers
+// List followers of the authenticated user
 request("GET /user/followers", createHeader()).then((resp) => {
   let followers = resp.data.map((x) => x.login);
   console.log(`\nTry to follow back all my ${followers.length} followers`);
 
   const promises = [];
 
+  // following everyone back
   for (let i = 0; i < followers.length; i++) {
     let userFollowBack = followers[i];
     promises.push(
@@ -35,6 +36,7 @@ request("GET /user/followers", createHeader()).then((resp) => {
 
   Promise.all(promises).then(() => {
     
+    // List the people the authenticated user follows
     request("GET /user/following", createHeader()).then((resp) => {
       let followingSet = new Set(resp.data.map((x) => x.login));
       let followerSet = new Set(followers)
