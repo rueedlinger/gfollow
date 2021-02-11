@@ -1,4 +1,4 @@
-# ghFollow.js - Follow People Back on GitHub
+# ghFollow.js - Following People Back on GitHub
 
 > *I started following people back on GitHub. First I thought this feature is useless. But since then I found a lot of interesting projects which I definitely would not have found. This script is for those which want to follow people back with just one click.*
 
