@@ -1,8 +1,8 @@
-# ghFollow.js - Following People Back on GitHub
+# ghFollow - Get Some Insights form Your GitHub Followers
 
-> *I started following people back on GitHub. First I thought this feature is useless. But since then I found a lot of interesting projects which I definitely would not have found. This script is for those which want to follow people back with just one click.*
+*I started following people back on GitHub. First I thought this feature is useless. But since then I found a lot of interesting projects which I definitely would not have found. So I started this repository with some scripts to play around with the social features from GitHub.*
 
-## How to Run the Script
+## First Steps
 
 1. Clone the repo
 
@@ -25,12 +25,21 @@ ACCESS_TOKEM=***** SECRET TOKEN *****
 npm install
 ```
 
-5. Run the script.
+
+## ghFollowBack.js
+
+This script is for those which want to follow people back with just one click. Run the script to follow people back on GitHub. 
+
 
 ```bash
-node ghFollow.js
+node ghFollowBack.js
 ```
 
+## ghStarred.js
 
+This scripts save the latest starred repositories from people you follow in the CSV file `starred.csv`.
 
+```bash
+node ghStarred.js
+```
 
