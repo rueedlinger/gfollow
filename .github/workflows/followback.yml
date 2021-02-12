@@ -2,13 +2,15 @@ name: FollowBack
 
 on:
  schedule:
+   # Runs at 08:00 UTC every day 
    - cron: "0 8 * * *"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: checkout 
+      uses: actions/checkout@v2
     - name: setup node
       uses: actions/setup-node@v1
       with:
