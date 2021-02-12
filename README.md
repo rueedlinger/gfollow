@@ -43,7 +43,9 @@ This scripts save the latest starred repositories from people you follow in the 
 node ghStarred.js
 ```
 
-## Run ghFollowBack.js as Daily Job With GitHub Actions
+## Run ghFollowBack.js as Daily Job With GitHub Actions 
+
+![FollowBack](https://github.com/rueedlinger/ghfollow/workflows/FollowBack/badge.svg)
 
 Store your personal access token as secret with the name `GH_FOLLOW_BACK_TOKEN` and create a GitHub Action which 
 runs the ghFollowBack.js as a daily job
@@ -53,7 +55,8 @@ runs the ghFollowBack.js as a daily job
 name: FollowBack
 
 on:
- # Runs at 12:00 UTC every day 
+ # Runs at 12:00 UTC every day. 
+ # Note there might be some delays (minutes) when the job is triggerd. 
  schedule:
  - cron: "0 12 * * *"
 
