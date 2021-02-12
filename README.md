@@ -53,9 +53,9 @@ runs the ghFollowBack.js as a daily job
 name: FollowBack
 
 on:
- # Runs at 11:15 UTC every day 
+ # Runs at 12:00 UTC every day 
  schedule:
- - cron: "30 11 * * *"
+ - cron: "0 12 * * *"
 
 jobs:
   build:
@@ -74,6 +74,7 @@ jobs:
         # set the token as secret
         GH_ACCESS_TOKEN: ${{ secrets.GH_FOLLOW_BACK_TOKEN }}
       run: node ghFollowBack.js
+
 ```
 
 ## Reference
