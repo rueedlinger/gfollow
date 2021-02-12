@@ -69,7 +69,7 @@ request("GET /user/following", createHeader()).then((resp) => {
         if (err) {
           console.log(err);
         } else {
-          fs.appendFile("starred.csv", csv, function (err) {
+          fs.writeFile("starred.csv", csv, function (err) {
             if (err) throw err;
             console.log("Saved!");
           });

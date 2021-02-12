@@ -10,7 +10,7 @@
 git clone https://github.com/rueedlinger/ghfollow.git
 ```
 
-2. Create a personal access token at https://github.com/settings/tokens/new?scopes=repo with only the access rights `user:follow`
+2. Create a personal access token at https://github.com/settings/tokens/new?scopes=user:follow with only the access rights `user:follow`
 
 
 3. Create a `.env` env file. Just rename [example.env](example.env) and replace the `GH_ACCESS_TOKEN` with your personal access token. 
