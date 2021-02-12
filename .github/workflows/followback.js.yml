@@ -1,8 +1,10 @@
 name: FollowBack
 
 on:
+ push:
+  branches: "**"
  schedule:
-   - cron: 0 0 * * *
+   - cron: "0 8 * * *"
 
 jobs:
   build:
