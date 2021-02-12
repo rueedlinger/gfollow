@@ -1,9 +1,9 @@
 name: FollowBack
 
 on:
- # Runs at 11:15 UTC every day 
+ # Runs at 12:00 UTC every day 
  schedule:
- - cron: "30 11 * * *"
+ - cron: "0 12 * * *"
 
 jobs:
   build:
