@@ -13,10 +13,10 @@ git clone https://github.com/rueedlinger/ghfollow.git
 2. Create a personal access token at https://github.com/settings/tokens/new?scopes=user:follow with only the access rights `user:follow`
 
 
-3. Create a `.env` env file. Just rename [example.env](example.env) and replace the `GH_ACCESS_TOKEN` with your personal access token. 
+3. Create a `.env` env file. Just rename [example.env](example.env) and replace the `GH_ACCESS_TOKEN` with your personal access token. Or save your access token as environment variable `GH_FOLLOW_BACK_TOKEN`.
 
 ```bash
-ACCESS_TOKEM=***** SECRET TOKEN *****
+GH_ACCESS_TOKEN=***** SECRET TOKEN *****
 ```
 
 4. Install all required packages.
@@ -53,9 +53,9 @@ runs the ghFollowBack.js as a daily job
 name: FollowBack
 
 on:
+ # Runs at 11:15 UTC every day 
  schedule:
-   # Runs at 11:30 UTC every day 
-   - cron: "30 11 * * *"
+ - cron: "30 11 * * *"
 
 jobs:
   build:
