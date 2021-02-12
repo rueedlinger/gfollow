@@ -1,7 +1,9 @@
 const { request } = require("@octokit/request");
-let converter = require("json-2-csv");
-let fs = require("fs");
+const csvPasrer = require("csv-parser");
+const converter = require("json-2-csv");
+const fs = require("fs");
 
+// load config
 require("dotenv").config();
 
 function createHeader(key, value) {
@@ -17,65 +19,93 @@ function createHeader(key, value) {
   return authHeader;
 }
 
-data = [];
+let csvOutputFileName = "starred.csv";
+let data = [];
+var ids = new Map();
 
-request("GET /user/following", createHeader()).then((resp) => {
-  let following = resp.data.map((x) => x.login);
+if (fs.existsSync(csvOutputFileName)) {
+  fs.createReadStream(csvOutputFileName)
+    .pipe(csvPasrer())
+    .on("data", (row) => {
+      ids.set(parseInt(row.id), row.name);
+    })
+    .on("end", () => {
+      loadData();
+    });
+} else {
+  loadData();
+}
 
-  const promises = [];
+function loadData() {
+  request("GET /user/following", createHeader()).then((resp) => {
+    let following = resp.data.map((x) => x.login);
 
-  for (let i = 0; i < following.length; i++) {
-    let user = following[i];
-    promises.push(
-      request(
-        "GET /users/{username}/starred?sort=created",
-        createHeader("username", user)
-      ).then((resp) => {
-        for (let i = 0; i < resp.data.length; i++) {
-          item = {
-            id: resp.data[i].id,
-            name: resp.data[i].name,
-            full_name: resp.data[i].full_name,
-            url: resp.data[i].html_url,
-            homepage: resp.data[i].homepage,
-            description: resp.data[i].description,
-            language: resp.data[i].language,
-            stargazers_count: resp.data[i].stargazers_count,
-            size: resp.data[i].size,
-            open_issues: resp.data[i].open_issues,
-            fork: resp.data[i].fork,
-            forks: resp.data[i].forks,
-            archived: resp.data[i].archived,
-            disabled: resp.data[i].disabled,
-          };
-          data.push(item);
-        }
-      })
-    );
-  }
+    const promises = [];
 
-  Promise.all(promises).then(() => {
-    options = {
-      delimiter: {
-        wrap: '"',
-        field: ";",
-        emptyFieldValue: "none",
-      },
-    };
+    for (let i = 0; i < following.length; i++) {
+      let user = following[i];
+      promises.push(
+        request(
+          "GET /users/{username}/starred?sort=created",
+          createHeader("username", user)
+        ).then((resp) => {
+          for (let i = 0; i < resp.data.length; i++) {
+            let id = resp.data[i].id;
+            let name = resp.data[i].name;
 
-    converter.json2csv(
-      data,
-      (err, csv) => {
-        if (err) {
-          console.log(err);
-        } else {
-          fs.writeFile("starred.csv", csv, function (err) {
-            if (err) throw err;
-            console.log("Saved!");
-          });
-        }
-      },
-      options
-    );
+            //console.log(ids.has(id))
+            if (!ids.has(id)) {
+              item = {
+                id: id,
+                name: name,
+                full_name: resp.data[i].full_name,
+                url: resp.data[i].html_url,
+                homepage: resp.data[i].homepage,
+                description: resp.data[i].description,
+                language: resp.data[i].language,
+                stargazers_count: resp.data[i].stargazers_count,
+                size: resp.data[i].size,
+                open_issues: resp.data[i].open_issues,
+                fork: resp.data[i].fork,
+                forks: resp.data[i].forks,
+                archived: resp.data[i].archived,
+                disabled: resp.data[i].disabled,
+              };
+              data.push(item);
+              ids.set(id, name);
+            }
+          }
+        })
+      );
+    }
+
+    Promise.all(promises).then(() => {
+      options = {
+        delimiter: {
+          wrap: '"',
+          field: ",",
+          emptyFieldValue: "null",
+        },
+      };
+
+      converter.json2csv(
+        data,
+        (err, csv) => {
+          if (err) {
+            console.log(err);
+          } else {
+            // append to file
+            fs.appendFile(csvOutputFileName, csv, function (err) {
+              if (err) throw err;
+              console.log(`File contains ${ids.size} entries.`);
+              console.log(
+                `Append ${data.length} new entries to the file ${csvOutputFileName}.`
+              );
+            });
+          }
+        },
+        options
+      );
+    });
   });
-});
+}

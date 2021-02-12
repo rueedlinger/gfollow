@@ -21,6 +21,7 @@
   "homepage": "https://github.com/rueedlinger/gfollow#readme",
   "dependencies": {
     "@octokit/core": "^3.2.5",
+    "csv-parser": "^3.0.0",
     "dotenv": "^8.2.0",
     "json-2-csv": "^3.10.2"
   }
