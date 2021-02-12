@@ -1,6 +1,9 @@
-# ghFollow - Node Scripts to Get Some Insights From People You Follow on Github
+# ghFollow - Node Scripts to Get Some Insights From People You Follow on GitHub
 
-*I started following people back on GitHub. First I thought this feature is useless. But since then I found a lot of interesting projects which I definitely would not have found. So I started this repository with some scripts to play around with the social features from GitHub.*
+I started following people back on GitHub. First I thought this feature is useless. But since then I found a lot of interesting projects which I definitely would not have found. So I started this repository with some scripts to play around with the social features from GitHub.
+
+- **ghFollowBack.js** a script to follow people back.
+- **ghStarred.js** a script to save the starred projects from the people you follow in a CSV file.
 
 ## First Steps
 
@@ -37,7 +40,7 @@ node ghFollowBack.js
 
 ## ghStarred.js
 
-This scripts save the latest starred repositories from people you follow in the CSV file `starred.csv`.
+This scripts saves the latest starred repositories from people you follow in the CSV file `starred.csv`. If the file already exists new entries are append if they do not exist yet. To check if a entry already exist the project id is used.
 
 ```bash
 node ghStarred.js

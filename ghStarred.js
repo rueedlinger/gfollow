@@ -34,7 +34,7 @@ if (fs.existsSync(csvOutputFileName)) {
       ids.set(parseInt(row.id), row.name);
     })
     .on("end", () => {
-      console.log(`File ${csvOutputFileName} contains ${ids.size} entries.`);
+      console.log(`File ${csvOutputFileName} contains ${ids.size} entries`);
       loadData();
     });
 } else {
@@ -114,7 +114,7 @@ function loadData() {
                 fs.appendFileSync(csvOutputFileName, defaultEol);
               }
               console.log(
-                `Append ${data.length} new entries to the file ${csvOutputFileName}.`
+                `Append ${data.length} new entries to the file ${csvOutputFileName}`
               );
             });
           }
