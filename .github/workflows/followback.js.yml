@@ -1,0 +1,22 @@
+name: FollowBack
+
+on:
+ schedule:
+   - cron: 0 0 * * *
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12
+    - name: install modules
+      run: npm install
+    - name: run ghFollowBack.js
+      env: 
+        # set the token as secret
+        GH_ACCESS_TOKEN: ${{ secrets.GH_FOLLOW_BACK_TOKEN }}
+      run: node ghFollowBack.js
