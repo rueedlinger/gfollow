@@ -14,45 +14,54 @@ function createHeader(key, value) {
   return authHeader;
 }
 
-// List followers of the authenticated user
-request("GET /user/followers", createHeader()).then((resp) => {
-  let followers = resp.data.map((x) => x.login);
-  console.log(`\nTry to follow back all my ${followers.length} followers`);
+// get all following users
+request("GET /user/following", createHeader())
+  .then((resp) => {
+    return new Set(resp.data.map((x) => x.login));
+  })
+  .then((following) => {
+    return Promise.all([
+      following,
+      // get all followers
+      request("GET /user/followers", createHeader()).then((resp) => {
+        return new Set(resp.data.map((x) => x.login));
+      }),
+    ]);
+  })
+  .then(([following, followers]) => {
+    console.log(`following: ${following.size}`);
+    console.log(`followers: ${followers.size}`);
 
-  const promises = [];
-
-  // following everyone back
-  for (let i = 0; i < followers.length; i++) {
-    let userFollowBack = followers[i];
-    promises.push(
-      // Follow a user
-      request(
-        "PUT /user/following/{username}",
-        createHeader("username", userFollowBack)
-      ).then((resp) => {
-        console.log(`${userFollowBack} => HTTP ${resp.status}`);
-      })
+    let notFollowingBack = new Set(
+      [...following].filter((x) => !followers.has(x))
     );
-  }
+    let missedToFollow = new Set(
+      [...followers].filter((x) => !following.has(x))
+    );
 
-  Promise.all(promises).then(() => {
-    
-    // List the people the authenticated user follows
-    request("GET /user/following", createHeader()).then((resp) => {
-      let followingSet = new Set(resp.data.map((x) => x.login));
-      let followerSet = new Set(followers)
-        
-      let notFollowingBack = new Set(
-        [...followingSet].filter((x) => !followerSet.has(x))
-      );
-      let missedToFollow = new Set(
-        [...followerSet].filter((x) => !followingSet.has(x))
-      );
-      console.log(`\nThere ${notFollowingBack.size} people who do not follow you back!`);
-      console.log(notFollowingBack);
+    console.log(
+      `\nThere are ${notFollowingBack.size} people who do not follow you back! :-(`
+    );
+    console.log(notFollowingBack);
 
-      console.log(`\nYou forgot to follow ${missedToFollow.size} people back!`);
-      console.log(missedToFollow);
+    console.log(`\nYou forgot to follow ${missedToFollow.size} people back!`);
+    console.log(missedToFollow);
+
+    const promises = [];
+
+    missedToFollow.forEach((followBackUsername) => {
+      promises.push(
+        // Follow a user back
+        request(
+          "PUT /user/following/{username}",
+          createHeader("username", followBackUsername)
+        ).then((resp) => {
+          console.log(`follow back => ${followBackUsername}`);
+        })
+      );
+    });
+
+    Promise.all(promises).then(() => {
+      console.log("Done!")
     });
   });
-});
