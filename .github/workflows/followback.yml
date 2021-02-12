@@ -3,7 +3,7 @@ name: FollowBack
 on:
  # Runs at 11:15 UTC every day 
  schedule:
-   - cron: "30 11 * * *"
+ - cron: "30 11 * * *"
 
 jobs:
   build:
