@@ -1,4 +1,4 @@
-# ghFollow - Get Some Insights form Your GitHub Followers
+# ghFollow - Node Scripts to Get Some Insights From People You Follow on Github
 
 *I started following people back on GitHub. First I thought this feature is useless. But since then I found a lot of interesting projects which I definitely would not have found. So I started this repository with some scripts to play around with the social features from GitHub.*
 
