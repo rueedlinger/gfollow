@@ -43,3 +43,7 @@ This scripts save the latest starred repositories from people you follow in the 
 node ghStarred.js
 ```
 
+## Reference
+- `@octokit/request`: https://github.com/octokit/request.js/
+- API Starring: https://docs.github.com/en/rest/reference/activity#starring
+- API Followers: https://docs.github.com/en/rest/reference/users#followers
