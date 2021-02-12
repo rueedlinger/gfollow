@@ -19,20 +19,26 @@ function createHeader(key, value) {
   return authHeader;
 }
 
+let hasHeader = true;
+let defaultEol = "\n";
+
 let csvOutputFileName = "starred.csv";
 let data = [];
 var ids = new Map();
 
 if (fs.existsSync(csvOutputFileName)) {
+  hasHeader = false;
   fs.createReadStream(csvOutputFileName)
     .pipe(csvPasrer())
     .on("data", (row) => {
       ids.set(parseInt(row.id), row.name);
     })
     .on("end", () => {
+      console.log(`File ${csvOutputFileName} contains ${ids.size} entries.`);
       loadData();
     });
 } else {
+  hasHeader = true;
   loadData();
 }
 
@@ -52,6 +58,9 @@ function loadData() {
           for (let i = 0; i < resp.data.length; i++) {
             let id = resp.data[i].id;
             let name = resp.data[i].name;
+
+            // skip header
+            if (id == "id") continue;
 
             //console.log(ids.has(id))
             if (!ids.has(id)) {
@@ -84,8 +93,10 @@ function loadData() {
         delimiter: {
           wrap: '"',
           field: ",",
-          emptyFieldValue: "null",
+          eol: defaultEol,
         },
+        emptyFieldValue: "null",
+        prependHeader: hasHeader,
       };
 
       converter.json2csv(
@@ -97,7 +108,11 @@ function loadData() {
             // append to file
             fs.appendFile(csvOutputFileName, csv, function (err) {
               if (err) throw err;
-              console.log(`File contains ${ids.size} entries.`);
+
+              // add eol when there was some data
+              if (data.length > 0) {
+                fs.appendFileSync(csvOutputFileName, defaultEol);
+              }
               console.log(
                 `Append ${data.length} new entries to the file ${csvOutputFileName}.`
               );
