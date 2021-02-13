@@ -2,8 +2,9 @@
 
 I started following people back on GitHub. First I thought this feature is useless. But since then I found a lot of interesting projects which I definitely would not have found. So I started this repository with some scripts to play around with the social features from GitHub.
 
-- **ghFollowBack.js** a script to follow people back.
-- **ghStarred.js** a script to save the starred projects from the people you follow in a CSV file.
+- **ghFollowBack.js** a node script to follow people back.
+- **ghStarred.js** a node script to save the starred projects from the people you follow in a CSV file.
+- **starred.ipynb** a Jupyter notebook to analyze the CSV data from the ghStarred.js script.
 
 ## First Steps
 
@@ -46,7 +47,7 @@ This scripts saves the latest starred repositories from people you follow in the
 node ghStarred.js
 ```
 
-## Analyse Your Data From ghStarred.js
+## Analyze Your Data From ghStarred.js
 To get some insights from people you follow on GitHub
 jun can run the Jupyter notebook [notebook/starred.ipynb](notebook/starred.ipynb). This notebook loads the data from `starred.csv` file.
 
