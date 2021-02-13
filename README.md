@@ -46,6 +46,19 @@ This scripts saves the latest starred repositories from people you follow in the
 node ghStarred.js
 ```
 
+## Analyse Your Data From ghStarred.js
+To get some insights from people you follow on GitHub
+jun can run the Jupyter notebook [notebook/starred.ipynb](notebook/starred.ipynb). This notebook loads the data from `starred.csv` file.
+
+You can see the most starred programming languages.
+![mMst starred programming languages](docs/languages.png "Most starred programming languages")
+
+What is the Relationship between forks, stars and open issues.
+![Relationship forks, stars and open issues](docs/fork_vs_stars.png "Relationship forks, stars and open issues")
+
+And last but not lest a world cloud for the project descriptions.
+![World cloud project description](docs/world_cloud.png "World cloud project description")
+
 ## Run ghFollowBack.js as Daily Job With GitHub Actions 
 
 ![FollowBack](https://github.com/rueedlinger/ghfollow/workflows/FollowBack/badge.svg)
@@ -53,6 +66,8 @@ node ghStarred.js
 Store your personal access token as secret with the name `GH_FOLLOW_BACK_TOKEN` and create a GitHub Action which 
 runs the ghFollowBack.js as a daily job
 (See [`.github/workflows/followback.yml`](.github/workflows/followback.yml)).
+
+
 
 ```yaml
 name: FollowBack
