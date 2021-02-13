@@ -51,13 +51,16 @@ node ghStarred.js
 To get some insights from people you follow on GitHub
 jun can run the Jupyter notebook [notebook/starred.ipynb](notebook/starred.ipynb). This notebook loads the data from `starred.csv` file.
 
-You can see the most starred programming languages.
+### What are the most starred programming languages?
+
 ![mMst starred programming languages](docs/languages.png "Most starred programming languages")
 
-What is the Relationship between forks, stars and open issues.
+### What is the Relationship between forks, stars and open issues?
+
 ![Relationship forks, stars and open issues](docs/fork_vs_stars.png "Relationship forks, stars and open issues")
 
-And last but not lest a world cloud for the project descriptions.
+### The project descriptions as world cloud
+
 ![World cloud project description](docs/world_cloud.png "World cloud project description")
 
 ## Run ghFollowBack.js as Daily Job With GitHub Actions 
