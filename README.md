@@ -2,9 +2,10 @@
 
 I started following people back on GitHub. First I thought this feature is useless. But since then I found a lot of interesting projects which I definitely would not have found. So I started this repository with some scripts to play around with the social features from GitHub.
 
-- **ghFollowBack.js** a node script to follow people back.
-- **ghStarred.js** a node script to save the starred projects from the people you follow in a CSV file.
+- **ghFollowBack.js** a Node script to follow people back.
+- **ghStarred.js** a Node script to save the starred projects from the people you follow in a CSV file.
 - **starred.ipynb** a Jupyter notebook to analyze the CSV data from the ghStarred.js script.
+
 
 ## First Steps
 
@@ -32,7 +33,7 @@ npm install
 
 ## ghFollowBack.js
 
-This script is for those which want to follow people back with just one click. Run the script to follow people back on GitHub. 
+This Node script is for those who want to follow people back with just one click. Just run the script to follow people back on GitHub. 
 
 
 ```bash
@@ -41,15 +42,15 @@ node ghFollowBack.js
 
 ## ghStarred.js
 
-This scripts saves the latest starred repositories from people you follow in the CSV file `starred.csv`. If the file already exists new entries are append if they do not exist yet. To check if a entry already exist the project id is used.
+This scripts saves the latest starred repositories from people you follow in the CSV file `starred.csv`. If the file already exists new entries are append if they do not exist yet. To check if a entry already exist the GitHub project id is used.
 
 ```bash
 node ghStarred.js
 ```
 
-## Analyze Your Data From ghStarred.js
+## Jupyter Notebook - Analyze the CSV Data From ghStarred.js
 To get some insights from people you follow on GitHub
-jun can run the Jupyter notebook [notebook/starred.ipynb](notebook/starred.ipynb). This notebook loads the data from `starred.csv` file.
+jun can run the Jupyter notebook [notebook/starred.ipynb](notebook/starred.ipynb). This notebook loads the data from `starred.csv` file and plots the following charts.
 
 ### What are the most starred programming languages?
 
@@ -101,6 +102,14 @@ jobs:
       run: node ghFollowBack.js
 
 ```
+
+## Git LFS
+Some of the files (`*.png, *.ipynb`) are stored in [Git LFS](https://git-lfs.github.com). When you want to work with them locally you need to install *git-lfs* and check them out.
+
+```bash
+git lfs checkout
+```
+
 
 ## Reference
 - `@octokit/request`: https://github.com/octokit/request.js/
