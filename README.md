@@ -72,7 +72,7 @@ jobs:
 
 ```
 
-## In What Kind of Projects are Users You Follow on GitHub Interested?
+## Get Some Insights From People You Follow
 
 The node scripts [`ghStarred.js`](ghStarred.js) saves the latest starred repositories from people you follow in the CSV file `starred.csv`. If the file already exists new entries are append if they do not exist yet. To check if a entry already exist the GitHub project id is used.
 
