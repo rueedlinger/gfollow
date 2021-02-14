@@ -34,7 +34,7 @@ npm install
 ## ghFollowBack.js
 
 This Node script is for those who want to follow people back with just one click. Just run the script to follow people back on GitHub. 
-
+If `GH_UNFOLLOW=true` set to true the script will also unfollow people which do not follow back. 
 
 ```bash
 node ghFollowBack.js

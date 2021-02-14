@@ -56,12 +56,27 @@ request("GET /user/following", createHeader())
           "PUT /user/following/{username}",
           createHeader("username", followBackUsername)
         ).then((resp) => {
-          console.log(`follow back => ${followBackUsername}`);
+          console.log(`follow (back) => ${followBackUsername}`);
         })
       );
     });
 
+    if (process.env.GH_UNFOLLOW == "true") {
+      console.log(`\nUnfollow: ${notFollowingBack.size} people!`);
+      notFollowingBack.forEach((notFollowBackUsername) => {
+        promises.push(
+          // Unfollow a user
+          request(
+            "DELETE /user/following/{username}",
+            createHeader("username", notFollowBackUsername)
+          ).then((resp) => {
+            console.log(`unfollow => ${notFollowBackUsername}`);
+          })
+        );
+      });
+    }
+
     Promise.all(promises).then(() => {
-      console.log("Done!")
+      console.log("\nDone!");
     });
   });
